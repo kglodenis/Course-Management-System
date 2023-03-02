@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainRoot" prefHeight="452.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coursemanagementsystem.fxControllers.MainCoursesWindow">
+   <children>
+      <TabPane prefHeight="467.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Courses">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane layoutY="-1.0" prefHeight="439.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="courseCreateButton" text="Create">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="401.0">
+                                       <children>
+                                          <TextField fx:id="courseTitle" layoutX="86.0" layoutY="20.0" prefHeight="25.0" prefWidth="579.0" />
+                                          <TextField fx:id="courseDescription" layoutX="86.0" layoutY="62.0" prefHeight="122.0" prefWidth="580.0" />
+                                          <DatePicker fx:id="courseStartDate" layoutX="86.0" layoutY="206.0" prefHeight="22.0" prefWidth="209.0" />
+                                          <DatePicker fx:id="courseEndDate" layoutX="86.0" layoutY="253.0" prefHeight="22.0" prefWidth="209.0" />
+                                          <Button layoutX="84.0" layoutY="295.0" mnemonicParsing="false" onAction="#CreateCourse" text="Create" />
+                                          <Label layoutX="23.0" layoutY="24.0" text="Title" />
+                                          <Label layoutX="23.0" layoutY="62.0" text="Description" />
+                                          <Label layoutX="23.0" layoutY="210.0" text="Start date" />
+                                          <Label layoutX="23.0" layoutY="257.0" text="End date" />
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab fx:id="courseDeleteButton" text="Delete">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ComboBox fx:id="allCourses2" layoutX="84.0" layoutY="22.0" onMouseClicked="#loadCourses" prefHeight="25.0" prefWidth="260.0" />
+                                          <Button layoutX="84.0" layoutY="66.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete Course" />
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                          <Label layoutX="31.0" layoutY="26.0" text="Courses" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab fx:id="courseViewButton" onSelectionChanged="#CourseTableView" text="View">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="courseTable" layoutY="4.0" prefHeight="407.0" prefWidth="861.0">
+                                            <columns>
+                                              <TableColumn fx:id="courseColId" prefWidth="59.3333740234375" text="ID" />
+                                              <TableColumn fx:id="courseColTitle" prefWidth="140.6666259765625" text="Title" />
+                                                <TableColumn fx:id="courseColDescription" prefWidth="240.66668701171875" text="Description" />
+                                                <TableColumn fx:id="courseColDateCreated" prefWidth="148.6666259765625" text="Date Created" />
+                                                <TableColumn fx:id="courseColStartDate" prefWidth="145.3333740234375" text="Start Date" />
+                                                <TableColumn fx:id="courseColEndDate" prefWidth="126.0" text="End Date" />
+                                            </columns>
+                                          </TableView>
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab fx:id="myModeratedCourses" text="My moderated">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ListView fx:id="myCourses" layoutX="23.0" layoutY="14.0" onMouseClicked="#loadFolder" prefHeight="377.0" prefWidth="503.0">
+                                             <contextMenu>
+                                                <ContextMenu>
+                                                   <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#editCourseFromTable" text="Edit course" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#deleteCourseFromTable" text="Delete course" />
+                                                   </items>
+                                                </ContextMenu>
+                                             </contextMenu></ListView>
+                                          <TreeView fx:id="courseFolders" layoutX="543.0" layoutY="14.0" prefHeight="387.0" prefWidth="483.0">
+                                             <contextMenu>
+                                                <ContextMenu>
+                                                   <items>
+                                                      <MenuItem mnemonicParsing="false" onAction="#addFolder" text="Add new folder" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#editFolder" text="Edit folder" />
+                                                      <MenuItem mnemonicParsing="false" onAction="#deleteFolder2" text="Delete folder" />
+                                                   </items>
+                                                </ContextMenu>
+                                             </contextMenu>
+                                          </TreeView>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="folderTab" text="Folders">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane layoutY="-3.0" prefHeight="441.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab fx:id="folderCreateButton" text="Create">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="401.0">
+                                       <children>
+                                          <TextField fx:id="folderName" layoutX="86.0" layoutY="20.0" prefHeight="25.0" prefWidth="579.0" />
+                                          <TextField fx:id="folderDescription" layoutX="86.0" layoutY="62.0" prefHeight="122.0" prefWidth="580.0" />
+                                          <Button layoutX="86.0" layoutY="206.0" mnemonicParsing="false" onAction="#CreateFolder" text="Create" />
+                                          <Label layoutX="23.0" layoutY="24.0" text="Name" />
+                                          <Label layoutX="23.0" layoutY="62.0" text="Description" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="folderDeleteButton" text="Delete">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ComboBox fx:id="allFolders" layoutX="80.0" layoutY="21.0" onMouseClicked="#loadFolders" prefHeight="25.0" prefWidth="260.0" />
+                                          <Button layoutX="80.0" layoutY="67.0" mnemonicParsing="false" onAction="#deleteFolder" text="Delete Folder" />
+                                          <Label layoutX="22.0" layoutY="25.0" text="Folders" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab onSelectionChanged="#FolderTableView" text="View">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="folderTable" prefHeight="411.0" prefWidth="863.0">
+                                            <columns>
+                                              <TableColumn fx:id="folderColId" prefWidth="75.0" text="ID" />
+                                              <TableColumn fx:id="folderColName" prefWidth="124.66668701171875" text="Name" />
+                                                <TableColumn fx:id="folderColDescription" prefWidth="484.6666259765625" text="Description" />
+                                                <TableColumn fx:id="folderColDate" minWidth="0.0" prefWidth="174.666748046875" text="Date Created" />
+                                            </columns>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                        <Button layoutX="971.0" layoutY="398.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="fileTab" onSelectionChanged="#FileTableView" text="Files">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane layoutY="-1.0" prefHeight="439.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab fx:id="fileCreateButton" text="Create">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="401.0">
+                                       <children>
+                                          <TextField fx:id="fileName" layoutX="86.0" layoutY="20.0" prefHeight="25.0" prefWidth="579.0" />
+                                          <TextField fx:id="fileDescription" layoutX="86.0" layoutY="62.0" prefHeight="122.0" prefWidth="580.0" />
+                                          <Button layoutX="86.0" layoutY="204.0" mnemonicParsing="false" onAction="#CreateFile" text="Create" />
+                                          <Label layoutX="23.0" layoutY="24.0" text="Name" />
+                                          <Label layoutX="23.0" layoutY="62.0" text="Description" />
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="fileDeleteButton" text="Delete">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ComboBox fx:id="allFiles" layoutX="88.0" layoutY="21.0" onMouseClicked="#loadFiles" prefHeight="25.0" prefWidth="260.0" />
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                          <Button layoutX="88.0" layoutY="61.0" mnemonicParsing="false" onAction="#DeleteFile" text="Delete File" />
+                                          <Label layoutX="32.0" layoutY="25.0" prefHeight="17.0" prefWidth="25.0" text="Files" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab onSelectionChanged="#FileTableView" text="View">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="fileTable" prefHeight="413.0" prefWidth="811.0">
+                                             <columns>
+                                                <TableColumn fx:id="fileColId" prefWidth="75.0" text="ID" />
+                                                <TableColumn fx:id="fileColName" prefWidth="124.66668701171875" text="Name" />
+                                                <TableColumn fx:id="fileColDescription" prefWidth="484.6666259765625" text="Description" />
+                                                <TableColumn fx:id="fileColDate" minWidth="0.0" prefWidth="126.0" text="Date Created" />
+                                             </columns>
+                                          </TableView>
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="userTab" text="User">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="439.0" prefWidth="1043.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                              <Tab text="View">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="271.0" prefWidth="737.0">
+                                       <children>
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                          <TableView fx:id="usersTable" layoutY="4.0" prefHeight="348.0" prefWidth="1043.0">
+                                             <columns>
+                                                <TableColumn fx:id="colId" prefWidth="41.3333740234375" text="ID" />
+                                                <TableColumn fx:id="colLogin" prefWidth="90.00006103515625" text="Login" />
+                                                <TableColumn fx:id="colDate" prefWidth="90.66668701171875" text="Date created" />
+                                                <TableColumn fx:id="colName" prefWidth="79.33331298828125" text="Name" />
+                                                <TableColumn fx:id="colSurname" prefWidth="98.666748046875" text="Surname" />
+                                                <TableColumn fx:id="colType" prefWidth="51.9998779296875" text="Type" />
+                                                <TableColumn fx:id="colCardNumber" prefWidth="91.9998779296875" text="Card number" />
+                                                <TableColumn fx:id="colStudNumber" prefWidth="96.0001220703125" text="Student number" />
+                                                <TableColumn fx:id="colEmail" prefWidth="117.3333740234375" text="Email" />
+                                                <TableColumn fx:id="colRepres" prefWidth="94.66650390625" text="Representative" />
+                                                <TableColumn fx:id="colAddress" text="Address" />
+                                                <TableColumn fx:id="colPhone" prefWidth="110.0" text="Phone number" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Delete">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ComboBox fx:id="allUsersForDelete" layoutX="71.0" layoutY="22.0" onMouseClicked="#loadUser" prefHeight="25.0" prefWidth="260.0" />
+                                          <Button layoutX="71.0" layoutY="66.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
+                                          <Button layoutX="971.0" layoutY="370.0" mnemonicParsing="false" onAction="#LogOut" text="Log out" />
+                                          <Label layoutX="21.0" layoutY="26.0" text="Users" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
